@@ -1,4 +1,4 @@
-"""
+﻿"""
 analysis.py
 Runs all analyses and saves results as CSV files to /output/.
 
@@ -45,13 +45,13 @@ def run():
     print(f"With skills data: {len(df):,}")
     print(f"With salary data: {len(df_sal):,}")
 
-    # ── Analysis 1: Job Postings Count by Title ──────────────────────────────
+    # ΓöÇΓöÇ Analysis 1: Job Postings Count by Title ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     title_counts = df_raw["job_title_short"].value_counts().reset_index()
     title_counts.columns = ["job_title", "postings"]
     title_counts.to_csv(f"{OUTPUT_DIR}/analysis1_job_title_counts.csv", index=False)
     print(f"\n[1] Job postings by title:\n{title_counts.to_string(index=False)}")
 
-    # ── Analysis 2: Top 15 Skills Overall ────────────────────────────────────
+    # ΓöÇΓöÇ Analysis 2: Top 15 Skills Overall ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     all_skills = [sk for lst in df["skills_list"] for sk in lst]
     top15 = pd.Series(Counter(all_skills)).sort_values(ascending=False).head(15).reset_index()
     top15.columns = ["skill", "count"]
@@ -59,7 +59,7 @@ def run():
     top15.to_csv(f"{OUTPUT_DIR}/analysis2_top15_skills.csv", index=False)
     print(f"\n[2] Top 15 skills overall:\n{top15.to_string(index=False)}")
 
-    # ── Analysis 3: Top 5 Skills per Job Title ────────────────────────────────
+    # ΓöÇΓöÇ Analysis 3: Top 5 Skills per Job Title ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     rows = []
     for job in df["job_title_short"].unique():
         skills = [sk for lst in df.loc[df["job_title_short"] == job, "skills_list"] for sk in lst]
@@ -69,7 +69,7 @@ def run():
     top5_per_job.to_csv(f"{OUTPUT_DIR}/analysis3_top5_per_job.csv", index=False)
     print(f"\n[3] Top 5 skills per job title:\n{top5_per_job.to_string(index=False)}")
 
-    # ── Analysis 4: Average Salary by Skill ──────────────────────────────────
+    # ΓöÇΓöÇ Analysis 4: Average Salary by Skill ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     skill_salaries = {}
     for _, row in df_sal.iterrows():
         for sk in row["skills_list"]:
@@ -84,7 +84,7 @@ def run():
     sal_df.to_csv(f"{OUTPUT_DIR}/analysis4_salary_by_skill.csv", index=False)
     print(f"\n[4] Top 15 skills by avg salary:\n{sal_df.to_string(index=False)}")
 
-    # ── Analysis 5: Top Skills for Major Job Titles (top 8 each) ─────────────
+    # ΓöÇΓöÇ Analysis 5: Top Skills for Major Job Titles (top 8 each) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     major_jobs = df["job_title_short"].value_counts().head(6).index.tolist()
     rows5 = []
     for job in major_jobs:
@@ -95,7 +95,7 @@ def run():
     top8_major.to_csv(f"{OUTPUT_DIR}/analysis5_top8_major_jobs.csv", index=False)
     print(f"\n[5] Top 8 skills for major job titles:\n{top8_major.to_string(index=False)}")
 
-    # ── Analysis 6: Skills by Country (top 5 countries) ──────────────────────
+    # ΓöÇΓöÇ Analysis 6: Skills by Country (top 5 countries) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     top_countries = df["job_country"].value_counts().head(5).index.tolist()
     rows6 = []
     for country in top_countries:
@@ -106,7 +106,7 @@ def run():
     country_skills.to_csv(f"{OUTPUT_DIR}/analysis6_skills_by_country.csv", index=False)
     print(f"\n[6] Top 5 skills by country:\n{country_skills.to_string(index=False)}")
 
-    # ── Analysis 7: Average Salary by Job Title ───────────────────────────────
+    # ΓöÇΓöÇ Analysis 7: Average Salary by Job Title ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     sal_by_job = (
         df_sal.groupby("job_title_short")["salary_year_avg"]
         .agg(avg_salary="mean", data_points="count")
@@ -117,14 +117,14 @@ def run():
     sal_by_job.to_csv(f"{OUTPUT_DIR}/analysis7_salary_by_job_title.csv", index=False)
     print(f"\n[7] Average salary by job title:\n{sal_by_job.to_string(index=False)}")
 
-    # ── Analysis 8: Job Posting Trend Over Time (daily, Jan 2024) ────────────
+    # ΓöÇΓöÇ Analysis 8: Job Posting Trend Over Time (daily, Jan 2024) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     df_raw["post_date"] = pd.to_datetime(df_raw["job_posted_date"]).dt.date
     trend = df_raw.groupby("post_date").size().reset_index(name="postings")
     trend.to_csv(f"{OUTPUT_DIR}/analysis8_posting_trend.csv", index=False)
     print(f"\n[8] Job posting trend (daily): {len(trend)} days, "
           f"min={trend['postings'].min()}, max={trend['postings'].max()}")
 
-    # ── Analysis 9: Skill Categories ──────────────────────────────────────────
+    # ΓöÇΓöÇ Analysis 9: Skill Categories ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     skill_freq = Counter(all_skills)
     cat_rows = []
     for cat, skills in SKILL_CATEGORIES.items():
@@ -134,7 +134,7 @@ def run():
     cat_df.to_csv(f"{OUTPUT_DIR}/analysis9_skill_categories.csv", index=False)
     print(f"\n[9] Skill categories:\n{cat_df.to_string(index=False)}")
 
-    # ── Analysis 10: Skill Importance Ranking (number of job roles) ──────────
+    # ΓöÇΓöÇ Analysis 10: Skill Importance Ranking (number of job roles) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     skill_role_set = {}
     for job in df["job_title_short"].unique():
         job_skills_flat = set(sk for lst in df.loc[df["job_title_short"] == job, "skills_list"] for sk in lst)
@@ -147,7 +147,7 @@ def run():
     importance_df.to_csv(f"{OUTPUT_DIR}/analysis10_skill_importance.csv", index=False)
     print(f"\n[10] Skill importance ranking (top 15):\n{importance_df.to_string(index=False)}")
 
-    # ── Analysis 11: Average Number of Skills Required per Job ───────────────
+    # ΓöÇΓöÇ Analysis 11: Average Number of Skills Required per Job ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     df["n_skills"] = df["skills_list"].map(len)
     avg_skills = df.groupby("job_title_short")["n_skills"].mean().sort_values(ascending=False).reset_index()
     avg_skills.columns = ["job_title", "avg_skills_required"]
